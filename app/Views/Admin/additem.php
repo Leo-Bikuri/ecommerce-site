@@ -23,7 +23,7 @@
                 <h1 class="mb-5 text-start text-decoration-underline text-white">Add New Item</h1>
 
                 <form>
-                  <!-- 2 column grid layout with text inputs for the first and last names -->
+
                   <div class="row">
                     <div class="col-12 col-md-6 mb-4">
                       <div class="form-outline">
@@ -55,25 +55,24 @@
                     </div>
 
 
-                  <!-- Email input -->
                   <div class="form-outline mb-4">
                     <input type="email" id="form6Example5" class="form-control border-bottom border-warning rounded-0 w-25" />
                     <label class="form-label text-white" for="form6Example5">Price</label>
                   </div>
 
-                  <!-- Number input -->
+
                   <div class="form-outline mb-4">
                     <label class="form-label text-white img-lbl" for="customFile">Image</label>
                     <input type="file" id="customFile" class="form-control border-bottom border-warning rounded-0 w-75" />
                   </div>
 
-                  <!-- Message input -->
+   
                   <div class="form-outline mb-4">
                     <textarea class="form-control border-bottom border-warning rounded-0 w-75" data-mdb-showcounter="true" maxlength="20" id="form16" rows="4"></textarea>
                     <label class="form-label text-white" for="form6Example7">Description</label>
                   </div>
 
-                  <!-- Submit button -->
+
                   <button type="submit" class="btn btn-secondary btn-rounded btn-block btn-color w-75">Submit</button>
                 </form>
 
