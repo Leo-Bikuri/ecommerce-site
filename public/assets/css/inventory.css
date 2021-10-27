@@ -2,6 +2,7 @@ html,
 body,
 .intro {
   height: 100%;
+  overflow-x: hidden;
 }
 .background{
     background-color: rgb(13, 19, 25);
@@ -22,4 +23,21 @@ body,
 }
 .img-lbl{
     margin-left: 11px;
+}
+.select{
+    border: none;
+    border-bottom: solid 1px orange;
+    background: none;
+    color: white;
+    height: 40px;
+    width: 100%;
+    outline: none;
+}
+option{
+    color: white;
+    background-color: #0d1319;
+    outline: none;
+}
+.sub{
+    width: 50%;
 }
