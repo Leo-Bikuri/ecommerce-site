@@ -42,14 +42,24 @@
                     <div class="row">
                         <div class="col-12 col-md-6 mb-4">
                             <div class="form-outline mb-4">
-                                <input type="text" id="form6Example3" class="form-control border-bottom border-warning rounded-0 w-100" />
-                                <label class="form-label text-white" for="form6Example3">Category</label>
+                              <select class="mdb-select md-form select">
+                                <option value="" disabled selected>Choose category</option>
+                                <option value="1">Men</option>
+                                <option value="2">Women</option>
+                                <option value="3">Children</option>
+                                <option value="3">Pets</option>
+                              </select>
                             </div>
                         </div>
                         <div class="col-12 col-md-6 mb-4">
                             <div class="form-outline">
-                                <input type="text" id="form6Example4" class="form-control border-bottom border-warning rounded-0 w-50" />
-                                <label class="form-label text-white" for="form6Example4">Sub Category</label>
+                                <select class="mdb-select md-form select sub">
+                                    <option value="" disabled selected>Choose sub-category</option>
+                                    <option value="1">Men</option>
+                                    <option value="2">Women</option>
+                                    <option value="3">Children</option>
+                                    <option value="3">Pets</option>
+                                </select>
                             </div>
                         </div>
                     </div>
@@ -84,5 +94,9 @@
     </div>
   </div>
 </section>
+<script>
+
+
+</script>
 </body>
 </html>
