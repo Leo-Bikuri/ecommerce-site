@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -44,10 +45,9 @@
                             <div class="form-outline mb-4">
                               <select class="mdb-select md-form select">
                                 <option value="" disabled selected>Choose category</option>
-                                <option value="1">Men</option>
-                                <option value="2">Women</option>
-                                <option value="3">Children</option>
-                                <option value="3">Pets</option>
+                                <?php foreach($categories as $arr){
+                                        echo "<option id=".$arr['category_id']." onclick = 'addsub_categories(this.id);' value = ".$arr['category_name'].">".$arr['category_name']."</option>";
+                                    }?>
                               </select>
                             </div>
                         </div>
@@ -95,8 +95,12 @@
   </div>
 </section>
 <script>
+    function addsub_categories(id){
+      // var request = new XMLHttpRequest();
+      alert(id);
+      console.log("localhost:8080/Admin/getSubcategories/"+id);
 
-
+    }
 </script>
 </body>
 </html>
