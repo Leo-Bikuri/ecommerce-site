@@ -17,7 +17,7 @@ class getCategories extends Model{
 
     public function getSC($id){
         $builder = $this->db->table('tbl_subcategories');
-        $subcategories = $builder->getWhere(['category' == $id])->getResult();
+        $subcategories = $builder->getWhere(['category' => $id])->getResult();
         return $subcategories;
         
     }

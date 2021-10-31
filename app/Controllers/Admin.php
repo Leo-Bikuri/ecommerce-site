@@ -9,8 +9,13 @@ class Admin extends BaseController
 {
 	public function index()
 	{
-		echo view('Admin/sidebar.php');
+		echo view('Admin/sidebar');
 		echo view('Admin/admin-dashboard');
+	}
+
+	public function inventory(){
+		echo view('Admin/sidebar');
+		echo view('Admin/inventory');
 	}
 
 	public function additem(){
@@ -20,16 +25,24 @@ class Admin extends BaseController
 		$categories = $model->getC();
 		$categories = json_decode(json_encode($categories), true);
 		$data['categories'] = $categories;
-		echo view('Admin/sidebar.php');
-		echo view('Admin/additem.php', $data);
+		echo view('Admin/sidebar');
+		echo view('Admin/additem', $data);
 	}
 	public function getSubcategories($id = NULL){
+		$data = [];
 		intval($id);
 		$db = db_connect();
 		$model = new getCategories($db);
 		$subcategories = $model->getSC($id);
-		$subcategories = json_decode(json_encode($subcategories), true);
-		return $subcategories;
+		foreach($subcategories as $subcategory){
+			$data[] = array(
+				"id"=>$subcategory->subcategory_id,
+				"name"=>$subcategory->subcategory_name,
+				"category"=>$subcategory->category
+			);
+		}
+		$response['data'] = $data;
+		return $this->response->setJSON($response);
 	}
 
 }
