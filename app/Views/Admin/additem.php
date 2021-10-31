@@ -43,22 +43,18 @@
                     <div class="row">
                         <div class="col-12 col-md-6 mb-4">
                             <div class="form-outline mb-4">
-                              <select class="mdb-select md-form select">
-                                <option value="" disabled selected>Choose category</option>
+                              <select class="mdb-select md-form select" onchange = 'addsub_categories(value);'>
+                                <option value="" disabled selected >Choose category</option>
                                 <?php foreach($categories as $arr){
-                                        echo "<option id=".$arr['category_id']." onclick = 'addsub_categories(this.id);' value = ".$arr['category_name'].">".$arr['category_name']."</option>";
+                                        echo "<option id=".$arr['category_id']." value = ".$arr['category_id'].">".$arr['category_name']."</option>";
                                     }?>
                               </select>
                             </div>
                         </div>
                         <div class="col-12 col-md-6 mb-4">
                             <div class="form-outline">
-                                <select class="mdb-select md-form select sub">
-                                    <option value="" disabled selected>Choose sub-category</option>
-                                    <option value="1">Men</option>
-                                    <option value="2">Women</option>
-                                    <option value="3">Children</option>
-                                    <option value="3">Pets</option>
+                                <select class="mdb-select md-form select sub" id="subcategories">
+                                  <option value="" disabled selected>Choose sub-category</option>
                                 </select>
                             </div>
                         </div>
@@ -96,11 +92,26 @@
 </section>
 <script>
     function addsub_categories(id){
-      // var request = new XMLHttpRequest();
-      alert(id);
-      console.log("localhost:8080/Admin/getSubcategories/"+id);
+    document.getElementById('subcategories').innerHTML='';
+    document.getElementById('subcategories').innerHTML='<option value="" disabled selected>Choose sub-category</option>';
+     var request = new XMLHttpRequest();
+     var url = "http://localhost:8080/Admin/getSubcategories/"+id;
 
-    }
+     request.onreadystatechange = function(){
+					if(this.readyState == 4 && this.status == 200){
+						var result = request.response;
+            const res = JSON.parse(result);
+            
+            for(var i = 0; i < 3; i++){
+              document.getElementById('subcategories').innerHTML+='<option value="'+res.data[i].id+'">'+res.data[i].name+'</option>';
+            }
+					}
+				};
+
+        request.open('GET',url,false);
+        request.setRequestHeader('Accept', 'application/json');
+			  request.send();
+      }
 </script>
 </body>
 </html>
