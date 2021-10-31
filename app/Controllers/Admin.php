@@ -18,7 +18,7 @@ class Admin extends BaseController
 		echo view('Admin/inventory');
 	}
 
-	public function additem(){
+	public function add_item(){
 		$data = [];
 		$db = db_connect();
 		$model = new getCategories($db);
@@ -45,6 +45,17 @@ class Admin extends BaseController
 		return $this->response->setJSON($response);
 	}
 
+
+	protected $seek;
+	public function additem(){
+		$this->see = service('request');
+
+		helper(['form']);
+		if($this->request->getMethod() == 'post'){
+			
+		}
+	}
 }
+
 
 ?>
