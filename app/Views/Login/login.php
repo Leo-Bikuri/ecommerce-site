@@ -25,14 +25,6 @@
                     <input type="password" placeholder="Password" name="password" value="" id="password" required0>
                 </div>
                 <a href="Index.php"><input class="login_btn" type="submit" name="Login" value = "LOGIN"></a>
-                <?php 
-            if(session()->has('success')){ ?>
-            <div class="alert alert-success" id="success_alert" role="alert">
-                <?php echo session()->get('success'); 
-                        session()->remove('success');
-                ?>
-            </div>
-            <?php } ?>
             </form>
             <p class="reg">New here?<a href="<?php echo base_url('Registration/index')?>" style="color: rgb(0, 102, 102);">Create an account</a></p>
             
@@ -47,6 +39,44 @@
 
     <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
     <script src="/jquery-validation-1.19.1/dist/jquery.validate.js"></script>
-    <script src="/js/form-validation.js"></script>
+    <script>
+        $(function() {
+            $("form[name = 'login-form']").validate({
+                rules: {
+                    email: {
+                        required: true,
+
+                        email: true
+                    },
+                    password: {
+                        required: true,
+                        minlength: 8
+                    }
+                },
+                messages: {
+                    email: "Please enter a valid email",
+                    password: {
+                        required: "Please provide a password",
+                        minlength: "Your password must be at least 8 characters long"
+                    }
+                },
+
+                submitHandler: function(form){
+                    $.ajax({
+                            url: '<?php echo base_url('Login/index')?>',
+                            type: 'POST',
+                            data: $(form).serialize(),
+                            success: function(response){
+                                if(response === "success"){
+                                window.location.href = "<?php echo base_url('/')?>";
+                                }else{
+                                    alert("Email or Password is incorrect");
+                                }
+                            }
+                        });
+                }
+            });
+});
+    </script>
 </body>
 </html>

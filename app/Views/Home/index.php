@@ -33,7 +33,7 @@
                                     }
                                 ?>"><?php
                                     if(session()->has('firstname')){
-                                        echo "Welcome, ".session()->get('firstname')." ".session()->get('lastname');
+                                        echo "Welcome, ".session()->get('firstname');
                                     }else{
                                         echo "Login/Signup";
                                     }

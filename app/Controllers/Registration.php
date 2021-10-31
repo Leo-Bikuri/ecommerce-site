@@ -31,9 +31,13 @@ class Registration extends BaseController
 			];
 
 			if(!$this->validate($rules)){
-				echo view('Registration/registration.php', [
+				// echo view('Registration/registration.php', [
+				// 	'validation' => $this->validator,
+				// ]);
+				$data = array(
 					'validation' => $this->validator,
-				]);
+				);
+				return $data;
 			}else{
 				$model = new UserModel();
 				$newData = [
@@ -47,7 +51,7 @@ class Registration extends BaseController
 				$model->save($newData);
 				$session = session();
 				$session->set('success', 'Registration Successful');
-				return redirect()->to('/Login');
+				return "success";
 			}
 		}
 	}

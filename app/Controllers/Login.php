@@ -22,9 +22,10 @@ class Login extends BaseController
 			];
 
 			if(!$this->validate($rules, $errors)){
-				echo view('Login/login.php', [
+				$data = array(
 					'validation' => $this->validator,
-				]);
+				);
+				return $data;
 			}else{
 				$model = new UserModel();
 
@@ -33,7 +34,7 @@ class Login extends BaseController
 
 				$this->setUserSession($user);
 
-				return redirect()->to('/Home');
+				return "success";
 			}
 		}else{
 			return view('Login/login.php');
