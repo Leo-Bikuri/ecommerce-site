@@ -48,11 +48,33 @@ class Admin extends BaseController
 
 	protected $seek;
 	public function additem(){
-		$this->see = service('request');
+		date_default_timezone_set('Africa/Nairobi');
+		$date = date('Y-m-d H:i:s');
+
+		$this->seek= service('request');
+		$destination = '/assets/images';
+		$image = $this->seek->getFile('image');
+		$image_name = $image->getName();
+		$image->move($destination, $image_name);
 
 		helper(['form']);
 		if($this->request->getMethod() == 'post'){
-			
+			$model = new ProductModel();
+			$data = [
+				'product_name' => $this->seek->getVar('name'),
+				'product_description' => $this->seek->getVar('quantity'),
+				'product_image' => $image->getClientName(),
+				'unit_price' => $this->seek->getVar('price'),
+				'available_quantity' => $this->seek->getVar('quantity'),
+				'subcategory_id' => $this->seek->getVar('subcategory'),
+				'created_at' =>    $date,
+				'updated_at'=>   $date,
+				'added_by'=> 1
+
+			];
+
+			$model->save($data);
+			return "success";
 		}
 	}
 }

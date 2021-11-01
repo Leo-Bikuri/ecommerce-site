@@ -9,37 +9,43 @@
     <title>Apparel</title>
 </head>
 <body>
-    <div class="inventory-table">
-        <table class="table table-striped table-dark">
-        <thead>
-            <tr>
-            <th scope="col">#</th>
-            <th scope="col">First</th>
-            <th scope="col">Last</th>
-            <th scope="col">Handle</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-            <th scope="row">1</th>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>@mdo</td>
-            </tr>
-            <tr>
-            <th scope="row">2</th>
-            <td>Jacob</td>
-            <td>Thornton</td>
-            <td>@fat</td>
-            </tr>
-            <tr>
-            <th scope="row">3</th>
-            <td>Larry</td>
-            <td>the Bird</td>
-            <td>@twitter</td>
-            </tr>
-        </tbody>
-        </table>
+    <div class="background">
+        <div class="card-body w-75 inventory-table">
+            <div class="table-responsive">
+                <table class="table table-dark ">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Quantity</th>
+                            <th scope="col">Price</th>
+                            <th scope="col">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th scope="row">1</th>
+                            <td>Sit</td>
+                            <td>Amet</td>
+                            <td>Consectetur</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">2</th>
+                            <td>Adipisicing</td>
+                            <td>Elit</td>
+                            <td>Sint</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">3</th>
+                            <td>Hic</td>
+                            <td>Fugiat</td>
+                            <td>Temporibus</td>
+                        </tr>
+                    </tbody>
+
+                </table>
+            </div>
+        </div>
     </div>
 </body>
 </html>

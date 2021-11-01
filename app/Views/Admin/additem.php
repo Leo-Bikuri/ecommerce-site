@@ -23,18 +23,18 @@
 
                 <h1 class="mb-5 text-start text-decoration-underline text-white">Add New Item</h1>
 
-                <form>
+                <form name="additem-form" method="post"  enctype="multipart/form-data" id="additem-form">
 
                   <div class="row">
                     <div class="col-12 col-md-6 mb-4">
                       <div class="form-outline">
-                        <input type="text" id="form6Example1" class="form-control border-bottom border-warning rounded-0" />
+                        <input type="text" id="form6Example1" class="form-control border-bottom border-warning rounded-0" name="name" />
                         <label class="form-label text-white" for="form6Example1">Title</label>
                       </div>
                     </div>
                     <div class="col-12 col-md-6 mb-4">
                       <div class="form-outline">
-                        <input type="text" id="form6Example2" class="form-control border-bottom border-warning rounded-0 w-50" />
+                        <input type="text" id="form6Example2" class="form-control border-bottom border-warning rounded-0 w-50" name="quantity" />
                         <label class="form-label text-white" for="form6Example2">Quantity</label>
                       </div>
                     </div>
@@ -43,7 +43,7 @@
                     <div class="row">
                         <div class="col-12 col-md-6 mb-4">
                             <div class="form-outline mb-4">
-                              <select class="mdb-select md-form select" onchange = 'addsub_categories(value);'>
+                              <select class="mdb-select md-form select" onchange = 'addsub_categories(value);' name="category">
                                 <option value="" disabled selected >Choose category</option>
                                 <?php foreach($categories as $arr){
                                         echo "<option id=".$arr['category_id']." value = ".$arr['category_id'].">".$arr['category_name']."</option>";
@@ -53,7 +53,7 @@
                         </div>
                         <div class="col-12 col-md-6 mb-4">
                             <div class="form-outline">
-                                <select class="mdb-select md-form select sub" id="subcategories">
+                                <select class="mdb-select md-form select sub" id="subcategories" name="subcategory">
                                   <option value="" disabled selected>Choose sub-category</option>
                                 </select>
                             </div>
@@ -62,19 +62,19 @@
 
 
                   <div class="form-outline mb-4">
-                    <input type="email" id="form6Example5" class="form-control border-bottom border-warning rounded-0 w-25" />
+                    <input type="text" id="form6Example5" class="form-control border-bottom border-warning rounded-0 w-25" name="price" />
                     <label class="form-label text-white" for="form6Example5">Price</label>
                   </div>
 
 
                   <div class="form-outline mb-4">
                     <label class="form-label text-white img-lbl" for="customFile">Image</label>
-                    <input type="file" id="customFile" class="form-control border-bottom border-warning rounded-0 w-75" />
+                    <input type="file" id="customFile" class="form-control border-bottom border-warning rounded-0 w-75" name="image" />
                   </div>
 
    
                   <div class="form-outline mb-4">
-                    <textarea class="form-control border-bottom border-warning rounded-0 w-75" data-mdb-showcounter="true" maxlength="20" id="form16" rows="4"></textarea>
+                    <textarea class="form-control border-bottom border-warning rounded-0 w-75" data-mdb-showcounter="true" maxlength="20" id="form16" rows="4" name="description"></textarea>
                     <label class="form-label text-white" for="form6Example7">Description</label>
                   </div>
 
@@ -90,7 +90,72 @@
     </div>
   </div>
 </section>
+<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+<script src="/jquery-validation-1.19.1/dist/jquery.validate.js"></script>
+<script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js"></script>
 <script>
+    $(function() {
+
+      $("form[name = 'additem-form']").validate({
+
+        rules: {
+
+            name: "required",
+            quantity: "required",
+            price: "required",
+            image: {
+              required: true,
+              accept: "image/*"
+            },
+            category: {
+              required: true
+            },
+            subcategory: {
+              required: true
+            },
+            description : "required"
+            },
+            messages: {
+                name: "Please enter the title of the item",
+                quantity: "Please specifiy quantity",
+                price : "Please enter the price",
+                image: {
+                    required: "Please provide a product image",
+                    accept: "Please only upload files of type image"
+                },
+                category: {
+                    required: "Please choose a category",
+                },
+                subcategory: {
+                    required: "Please choose a subcategory",
+                },
+                description: "Please enter a description for the item"
+              },
+
+            submitHandler: function(form){
+              var form = $('form')[0];
+              var formdata = new FormData(form);
+                $.ajax({
+                    url: '<?php echo base_url('Admin/additem')?>',
+                    type: 'POST',
+                    data: formdata,
+                    contentType: false, // NEEDED, DON'T OMIT THIS (requires jQuery 1.6+)
+                    processData: false,
+                    success: function(response){
+                        if(response === "success"){
+                        alert('Item added successfully');
+                        document.getElementById('additem-form').reset();
+                        }else{
+                            alert('Server error');
+                            document.getElementById('additem-form').reset();
+                        }
+                    }
+                 });
+            }
+       });
+    });
+
+
     function addsub_categories(id){
     document.getElementById('subcategories').innerHTML='';
     document.getElementById('subcategories').innerHTML='<option value="" disabled selected>Choose sub-category</option>';
