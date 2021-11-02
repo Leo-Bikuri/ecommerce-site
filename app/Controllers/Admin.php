@@ -14,8 +14,12 @@ class Admin extends BaseController
 	}
 
 	public function inventory(){
+
+		$model = new ProductModel();
+		$data['products'] = $model->paginate();
+		$data['pager'] = $model->pager;
 		echo view('Admin/sidebar');
-		echo view('Admin/inventory');
+		echo view('Admin/inventory', $data);
 	}
 
 	public function add_item(){
