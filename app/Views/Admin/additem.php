@@ -139,7 +139,7 @@
                     url: '<?php echo base_url('Admin/additem')?>',
                     type: 'POST',
                     data: formdata,
-                    contentType: false, // NEEDED, DON'T OMIT THIS (requires jQuery 1.6+)
+                    contentType: false, 
                     processData: false,
                     success: function(response){
                         if(response === "success"){

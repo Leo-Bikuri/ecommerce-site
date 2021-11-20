@@ -4,6 +4,7 @@ namespace App\Controllers;
 use App\Models\getCategories;
 use App\Models\ProductModel;
 use App\Models\CategoriesModel;
+use App\Models\UserModel;
 
 class Admin extends BaseController
 {
@@ -11,6 +12,13 @@ class Admin extends BaseController
 	{
 		echo view('Admin/sidebar');
 		echo view('Admin/admin-dashboard');
+	}
+	public function administrators(){
+		$data = [];
+		$model = new UserModel();
+		$users = json_decode(json_encode($model->getWhere(['role' => 1])->getResult()), true);
+		$data['admins'] = $users;
+		echo view('Admin/administrators', $data);
 	}
 
 	public function inventory(){
@@ -80,6 +88,13 @@ class Admin extends BaseController
 			$model->save($data);
 			return "success";
 		}
+	}
+
+	public function search($searchvalue = NULL){
+		$model = new ProductModel();
+		$data['with_name'] = json_decode(json_encode($model->like('product_name',$searchvalue)), true);
+		$data['with_id'] = json_decode(json_encode($model->orLike('product_id', $searchvalue, 'after')), true);
+		return $data;
 	}
 }
 

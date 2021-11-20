@@ -31,9 +31,9 @@
       <li>
        <a href="#">
          <i class='bx bx-user' ></i>
-         <span class="links_name">User</span>
+         <span class="links_name">Administrators</span>
        </a>
-       <span class="tooltip">User</span>
+       <span class="tooltip">Administrators</span>
      </li>
      <li>
        <a href="#">
