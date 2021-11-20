@@ -16,11 +16,12 @@ class Admin extends BaseController
 	public function administrators(){
 		$data = [];
 		$model = new UserModel();
-		$users = json_decode(json_encode($model->getWhere(['role' => 1])->getResult()), true);
+		$users = json_decode(json_encode($model->getWhere(['role' => 2])->getResult()), true);
 		$data['admins'] = $users;
+		echo view('Admin/sidebar');
+		// echo view('Admin/registration-popup');
 		echo view('Admin/administrators', $data);
 	}
-
 	public function inventory(){
 
 		$model = new ProductModel();
@@ -95,6 +96,51 @@ class Admin extends BaseController
 		$data['with_name'] = json_decode(json_encode($model->like('product_name',$searchvalue)), true);
 		$data['with_id'] = json_decode(json_encode($model->orLike('product_id', $searchvalue, 'after')), true);
 		return $data;
+	}
+
+	public function registration(){
+		echo view('Admin/sidebar');
+		echo view("Admin/registration");
+	}
+
+	protected $var;
+	public function register(){
+		$this->var = service('request');
+
+		helper(['form']);
+		if($this->request->getMethod() == 'post'){
+			$rules = [
+				'first_name' => 'required|min_length[3]|max_length[255]',
+				'last_name' => 'required|min_length[3]|max_length[255]',
+				'email' => 'required|min_length[6]|max_length[255]|valid_email|is_unique[tbl_users.email]',
+				'password'=> 'required|min_length[8]|max_length[255]',
+				'password_confirm'=> 'matches[password]'
+			];
+
+			if(!$this->validate($rules)){
+				// echo view('Registration/registration.php', [
+				// 	'validation' => $this->validator,
+				// ]);
+				$data = array(
+					'validation' => $this->validator,
+				);
+				return $data;
+			}else{
+				$model = new UserModel();
+				$newData = [
+					'first_name' => $this->var->getVar('first_name'),
+					'last_name' => $this->var->getVar('last_name'),
+					'email' => $this->var->getVar('email'),
+					'password'=> password_hash($this->var->getVar('password'), PASSWORD_DEFAULT),
+					'gender'=> $this->var->getVar('gender'),
+					'role'=> 2
+				];
+				$model->save($newData);
+				$session = session();
+				$session->set('success', 'Registration Successful');
+				return "success";
+			}
+		}
 	}
 }
 

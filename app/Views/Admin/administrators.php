@@ -8,6 +8,7 @@
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
     <link href="/assets/css/admin_table.css" rel="stylesheet">
+    <link href="/assets/css/registration.css" rel="stylesheet">
     <title>Apparel</title>
 </head>
 <body>
@@ -23,6 +24,14 @@
                 </ul>
             </header>
         </div> -->
+        <div class="container header">
+            <header class="d-flex justify-content-center py-3">
+                <ul class="nav nav-pills">
+                    <li class="nav-item"><a class="nav-link" id="button" onclick="popup()"><span><i class='bx bx-plus'></i></span>Add new user</a></li>
+                </ul>
+            </header>
+        </div>
+        
         <div class="container">
             <h2>Administrators</h2>
             <div class="search">
@@ -60,7 +69,9 @@
                 
         </div>
     </div>
+    <?php include("registration-popup.php");?>
     <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+    <script src="/jquery-validation-1.19.1/dist/jquery.validate.js"></script>
     <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js"></script>
 </body>
 </html>

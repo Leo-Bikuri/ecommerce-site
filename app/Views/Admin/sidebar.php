@@ -50,7 +50,7 @@
        <span class="tooltip">Analytics</span>
      </li>
      <li>
-       <a href="#">
+       <a href="<?php echo base_url('Admin/inventory'); ?>">
         <i class="fas fa-boxes"></i>
          <span class="links_name">Inventory</span>
        </a>

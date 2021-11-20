@@ -171,3 +171,6 @@ ul.pagination{
 .nav-link span{
     padding-right: 15px;
 }
+.nav-link:hover{
+    cursor: pointer;
+}
