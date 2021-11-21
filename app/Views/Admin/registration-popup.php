@@ -99,7 +99,7 @@
 
             submitHandler: function(form){
                 $.ajax({
-                    url: '<?php echo base_url('Admin/register')?>',
+                    url: '<?php echo $url; ?>',
                     type: 'POST',
                     data: $(form).serialize(),
                     success: function(response){

@@ -23,8 +23,8 @@ class Registration extends BaseController
 		helper(['form']);
 		if($this->request->getMethod() == 'post'){
 			$rules = [
-				'firstname' => 'required|min_length[3]|max_length[255]',
-				'lastname' => 'required|min_length[3]|max_length[255]',
+				'first_name' => 'required|min_length[3]|max_length[255]',
+				'last_name' => 'required|min_length[3]|max_length[255]',
 				'email' => 'required|min_length[6]|max_length[255]|valid_email|is_unique[tbl_users.email]',
 				'password'=> 'required|min_length[8]|max_length[255]',
 				'password_confirm'=> 'matches[password]'
@@ -41,8 +41,8 @@ class Registration extends BaseController
 			}else{
 				$model = new UserModel();
 				$newData = [
-					'first_name' => $this->seek->getVar('firstname'),
-					'last_name' => $this->seek->getVar('lastname'),
+					'first_name' => $this->seek->getVar('first_name'),
+					'last_name' => $this->seek->getVar('last_name'),
 					'email' => $this->seek->getVar('email'),
 					'password'=> password_hash($this->seek->getVar('password'), PASSWORD_DEFAULT),
 					'gender'=> $this->seek->getVar('gender'),
