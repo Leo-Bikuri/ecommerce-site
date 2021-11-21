@@ -37,10 +37,10 @@
      </li>
      <li>
        <a href="#">
-         <i class='bx bx-chat' ></i>
-         <span class="links_name">Messages</span>
+         <i class='bx bx-user' ></i>
+         <span class="links_name">Clients</span>
        </a>
-       <span class="tooltip">Messages</span>
+       <span class="tooltip">Clients</span>
      </li>
      <li>
        <a href="#">

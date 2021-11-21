@@ -23,7 +23,13 @@ class Admin extends BaseController
 		echo view('Admin/administrators', $data);
 	}
 	public function inventory(){
-
+		$data = [];
+		$db = db_connect();
+		$model = new getCategories($db);
+		$categories = $model->getC();
+		$categories = json_decode(json_encode($categories), true);
+		$data['categories'] = $categories;
+		
 		$model = new ProductModel();
 		$data['products'] = $model->paginate();
 		$data['pager'] = $model->pager;
@@ -31,16 +37,6 @@ class Admin extends BaseController
 		echo view('Admin/inventory', $data);
 	}
 
-	public function add_item(){
-		$data = [];
-		$db = db_connect();
-		$model = new getCategories($db);
-		$categories = $model->getC();
-		$categories = json_decode(json_encode($categories), true);
-		$data['categories'] = $categories;
-		echo view('Admin/sidebar');
-		echo view('Admin/additem', $data);
-	}
 	public function getSubcategories($id = NULL){
 		$data = [];
 		intval($id);
@@ -141,6 +137,15 @@ class Admin extends BaseController
 				return "success";
 			}
 		}
+	}
+
+	public function customers(){
+		$data = [];
+		$model = new UserModel();
+		$users = json_decode(json_encode($model->getWhere(['role' => 1])->getResult()), true);
+		$data['clients'] = $users;
+		echo view('Admin/sidebar');
+		echo view('Admin/customers', $data);
 	}
 }
 
