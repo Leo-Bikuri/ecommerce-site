@@ -16,8 +16,8 @@ class Admin extends BaseController
 	public function administrators(){
 		$data = [];
 		$model = new UserModel();
-		$users = json_decode(json_encode($model->getWhere(['role' => 2])->getResult()), true);
-		$data['admins'] = $users;
+		$data['admins'] = json_decode(json_encode($model->whereIn('role',[2])->paginate()), true);
+		$data['pager'] = $model->pager;
 		echo view('Admin/sidebar');
 		// echo view('Admin/registration-popup');
 		echo view('Admin/administrators', $data);
@@ -142,8 +142,9 @@ class Admin extends BaseController
 	public function customers(){
 		$data = [];
 		$model = new UserModel();
-		$users = json_decode(json_encode($model->getWhere(['role' => 1])->getResult()), true);
-		$data['clients'] = $users;
+		$data['clients'] = json_decode(json_encode($model->whereIn('role',[1])->paginate()), true);
+
+		$data['pager'] = $model->pager;
 		echo view('Admin/sidebar');
 		echo view('Admin/customers', $data);
 	}
