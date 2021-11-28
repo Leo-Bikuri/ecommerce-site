@@ -148,6 +148,11 @@ class Admin extends BaseController
 		echo view('Admin/sidebar');
 		echo view('Admin/customers', $data);
 	}
+
+	public function test(){
+		echo view('Admin/sidebar');
+		echo view('Admin/edit-item');
+	}
 }
 
 
