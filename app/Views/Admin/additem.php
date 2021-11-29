@@ -10,7 +10,8 @@
                     </div>
                     <div class="">
                         <form name="additem-form" method="post"  enctype="multipart/form-data" id="additem-form">
-                        <div class="input_field"> <span><i aria-hidden="true" class="fas fa-heading"></i></span>
+                        <div class="input_field">
+                            <span><i aria-hidden="true" class="fas fa-heading"></i></span>
                             <input type="text" name="name" placeholder="Title"  required />
                         </div>
                         <div class="form-outline mb-4">
@@ -22,12 +23,14 @@
                         </div>
                         <div class="row clearfix">
                             <div class="col_half">
-                            <div class="input_field"> <span><i aria-hidden="true" class="fas fa-sort-amount-up-alt"></i></span>
+                            <div class="input_field">
+                                <span><i aria-hidden="true" class="fas fa-sort-amount-up-alt"></i></span>
                                 <input type="text" name="quantity" placeholder="Quantity" />
                             </div>
                             </div>
                             <div class="col_half">
-                            <div class="input_field"> <span><i aria-hidden="true" class="fas fa-dollar-sign"></i></span>
+                            <div class="input_field">
+                                <span><i aria-hidden="true" class="fas fa-dollar-sign"></i></span>
                                 <input type="text" name="price" placeholder="Price per item" required />
                             </div>
                             </div>
