@@ -55,8 +55,8 @@
 }
  .avatar-upload .avatar-edit input + label {
     display: inline-block;
-    width: 300px;
-    height: 300px;
+    width: 70px;
+    height: 70px;
     margin-bottom: 0;
     border-radius: 100%;
     border: 1px solid transparent;
@@ -75,10 +75,10 @@
     content: "\f040";
     font-family: 'Font Awesome\ 5 Pro';
     font-weight: 300;
-    font-size: 4em;
+    font-size: 3em;
     color: #ff6700;
     position: absolute;
-    top: 6px;
+    top: 0;
     left: 0;
     right: 0;
     text-align: center;
@@ -88,6 +88,7 @@
 	 width: 300px;
 	 height: 300px;
 	 position: relative;
+     transform: translateX(-25%);
 	 border-radius: 100%;
 	 border: 6px solid #F8F8F8;
 	 box-shadow: 0px 2px 4px 0px rgba(0,0,0,0.1);
@@ -101,14 +102,18 @@
 	 background-position: center;
 }
 button{
-    width: 15%;
+    width: 20%;
     height: 35px;
     outline: none;
     background: #333;
     color: white;
+    outline: none;
 }
-.search{
-    /* float: right; */
+.searchbutton{
+    width: 25px;
+    height: 25px;
+    border-radius: 100%;
+    outline: none;
 }
     </style>
 </head>
@@ -122,11 +127,11 @@ button{
                         <h2 class="text-center modal-title">#90</h2>
                     </div>
                 </div>
-                <div class="row">
+                <div class="col-4">
                     <div class="search">
                         <form action="" method="post">
-                            <input type="text" placeholder="Search">
-                            <button type="submit"><i class='bx bx-search' ></i></button>
+                            <input type="text" class="form-control form-control-sm w-50 d-sm-inline-block"placeholder="Search by ID">
+                            <button type="submit" class="searchbutton"><i class='bx bx-search' ></i></button>
                         </form>
                     </div>
                 </div>
