@@ -9,13 +9,13 @@
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
     <style>
-    .popup{
+    .mod-display{
         background-color: rgba(0, 0, 0, 0.6);
         width: 100%;
         height: 100%;
         position: absolute;
         top: 0;
-        display: flex;
+        display: none;
         justify-content: center;
         align-items: center;
     }
@@ -118,7 +118,7 @@ button{
     </style>
 </head>
 <body>
-    <div class="popup">
+    <div class="mod-display">
         <div class="container">
             <div class="modal-header">
                 <div class="row">
@@ -214,6 +214,73 @@ button{
         $("#imageUpload").change(function() {
             readURL(this);
         });
+    function popup(){
+        document.querySelector('.popup').style.display = "flex";
+    }
+    function close_popup(){
+        document.querySelector('.popup').style.display = "none";
+    }
+
+    $(function() {
+
+      $("form[name = 'additem-form']").validate({
+
+        rules: {
+
+            name: "required",
+            quantity: "required",
+            price: "required",
+            image: {
+              required: true,
+              accept: "image/*"
+            },
+            category: {
+              required: true
+            },
+            subcategory: {
+              required: true
+            },
+            description : "required"
+            },
+            messages: {
+                name: "Please enter the title of the item",
+                quantity: "Please specifiy quantity",
+                price : "Please enter the price",
+                image: {
+                    required: "Please provide a product image",
+                    accept: "Please only upload files of type image"
+                },
+                category: {
+                    required: "Please choose a category",
+                },
+                subcategory: {
+                    required: "Please choose a subcategory",
+                },
+                description: "Please enter a description for the item"
+              },
+
+            submitHandler: function(form){
+              var form = $('form')[1];
+              var formdata = new FormData(form);
+                $.ajax({
+                    url: '<?php echo base_url('Admin/additem')?>',
+                    type: 'POST',
+                    data: formdata,
+                    contentType: false, 
+                    processData: false,
+                    success: function(response){
+                        if(response === "success"){
+                        alert('Item added successfully');
+                        document.getElementById('additem-form').reset();
+                        }else{
+                            alert('Server error');
+                            document.getElementById('additem-form').reset();
+                        }
+                    }
+                 });
+            }
+       });
+    });
     </script>
 </body>
 </html>
