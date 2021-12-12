@@ -42,6 +42,12 @@ $route['profiler/disable'] = "Profiler_controller/disable";
 $routes->get('/', 'Registration::index');
 $routes->get('/Registration', 'Registration::index');
 $routes->get('/Login', 'Login::index');
+
+//Client routes
+$routes->get('/home', 'Client::index');
+$routes->get('/shop', 'Client::shop');
+$routes->get('/cart', 'Client::cart');
+$routes->get('/product', 'Client::sproduct');
 // $routes->get('/profile', 'ProfileController::index',['filter' => 'authGuard']);
 
 /*
