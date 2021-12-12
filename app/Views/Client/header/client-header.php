@@ -81,13 +81,10 @@
                 <ul class="navbar-nav ml-auto">
 
                     <li class="nav-item">
-                        <a class="nav-link" href="index.html">Home</a>
+                        <a class="nav-link" href="/home">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="#">Shop</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="blog.html">Blog</a>
+                        <a class="nav-link active" href="/shop">Shop</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">About</a>
@@ -97,7 +94,7 @@
                     </li>
                     <li class="nav-item">
                         <i class="fal fa-search"></i>
-                        <i onclick="window.location.href='cart.html';" class="fal fa-shopping-bag"></i>
+                        <i onclick="window.location.href='/cart';" class="fal fa-shopping-bag"></i>
                     </li>
 
             </div>

@@ -14,8 +14,11 @@ class Client extends BaseController
 		echo view('Client/index');
 	}
     public function shop(){
+        $model = new ProductModel();
+        $data['products'] = $model->paginate();
+        $data['pager'] = $model->pager;
         echo view('Client/header/client-header');
-        echo view('Client/shop');
+        echo view('Client/shop', $data);
     }
     public function cart(){
         echo view('Client/header/client-header');

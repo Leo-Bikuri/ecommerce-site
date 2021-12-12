@@ -5,8 +5,9 @@
             <p>Here you can check out our new products with fair price on rymo.</p>
         </div>
         <div class="row mx-auto container">
+            <?php foreach($products as $product){?>
             <div onclick="window.location.href='sproduct.html';" class="product col-lg-3 col-md-4 col-12 text-center">
-                <img class="mb-3 img-fluid" src="img/shop/1.jpg" alt="">
+                <img class="mb-3 img-fluid" src="/media/shirt.jpg" alt="">
                 <div class="star">
                     <i class="fas fa-star"></i>
                     <i class="fas fa-star"></i>
@@ -14,10 +15,11 @@
                     <i class="fas fa-star"></i>
                     <i class="fas fa-star"></i>
                 </div>
-                <h5 class="p-name">Sport Boots</h5>
-                <h4 class="p-price">$92.00</h4>
+                <h5 class="p-name"><?= $product['product_name']?></h5>
+                <h4 class="p-price"><?= $product['unit_price']?></h4>
                 <button class="buy-btn">Buy Now</button>
             </div>
+            <?php } ?>
             <!-- <div class="product col-lg-3 col-md-4 col-12 text-center">
                 <img class="mb-3 img-fluid" src="img/shop/2.jpg" alt="">
                 <div class="star">
@@ -283,6 +285,9 @@
                 </ul>
             </nav>--->
         </div>
+        <ul class="pagination">
+                <?= $pager->links() ?>
+        </ul>
     </section>
 
     <footer class="mt-5 py-5">
