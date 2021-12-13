@@ -22,7 +22,7 @@
             <div class="col-lg-6 col-md-12 col-12">
                 <h6>Home / T-Shirt</h6>
                 <h3 class="py-4">Men's Fashion T Shirt</h3>
-                <h2>$139.00</h2>
+                <h2>20000</h2>
                 <select class="my-3">
                   <option>Select Size</option>
                   <option>XL</option>
