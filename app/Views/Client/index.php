@@ -1,9 +1,19 @@
     <section id="home">
         <div class="container">
-            <h5>NEW ARRIVALS</h5>
-            <h1><span>Best Price</span> This Year</h1>
-            <p>Shoomatic offers your very comfortable time<br>on walking and exercises.</p>
+            <h1><span>Best Price</span> this Christmas Season</h1>
+            <p><h3 style = "display: inline;">&lt;style&gt;</h3> offers you the best clothing <br> to meet al your needs.</p>
             <button>Shop Now</button>
+        </div>
+    </section>
+
+    <section id="brand" class="container">
+        <div class="row m-0 py-5">
+            <img class="img-fluid col-lg-2 col-md-4 col-6" src="/assets/images/brands/1.png" alt="">
+            <img class="img-fluid col-lg-2 col-md-4 col-6" src="/assets/images/brands/2.png" alt="">
+            <img class="img-fluid col-lg-2 col-md-4 col-6" src="/assets/images/brands/3.png" alt="">
+            <img class="img-fluid col-lg-2 col-md-4 col-6" src="/assets/images/brands/4.png" alt="">
+            <img class="img-fluid col-lg-2 col-md-4 col-6" src="/assets/images/brands/5.png" alt="">
+            <img class="img-fluid col-lg-2 col-md-4 col-6" src="/assets/images/brands/6.png" alt="">
         </div>
     </section>
 

@@ -65,6 +65,7 @@
         .pagination a {
             color: #000;
         }
+        
     </style>
 
 </head>
@@ -73,7 +74,7 @@
     <!-- NAVIGATION -->
     <nav class="navbar navbar-expand-lg navbar-light bg-white py-3 fixed-top">
         <div class="container">
-            <img src="img/logo1.png" alt="">
+            <h1>&lt;style&gt;</h1>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span><i id="bar" class="fas fa-bars"></i></span>
         </button>
@@ -85,6 +86,11 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link active" href="/shop">Shop</a>
+                        <ul>
+                        <?php foreach($categories as $category){ ?>
+                        <li><a href="/shop/<?=$category['category_id']?>"><?=$category['category_name']?></a></li>
+                        <?php } ?>
+                        </ul>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">About</a>

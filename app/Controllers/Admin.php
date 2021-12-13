@@ -19,7 +19,6 @@ class Admin extends BaseController
 		$data['admins'] = json_decode(json_encode($model->whereIn('role',[2])->paginate()), true);
 		$data['pager'] = $model->pager;
 		echo view('Admin/sidebar');
-		// echo view('Admin/registration-popup');
 		echo view('Admin/administrators', $data);
 	}
 	public function inventory(){
