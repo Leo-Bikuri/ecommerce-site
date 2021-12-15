@@ -3,6 +3,7 @@
 namespace App\Controllers;
 use App\Models\getCategories;
 use App\Models\ProductModel;
+use App\Models\ProductImageModel;
 use App\Models\CategoriesModel;
 use App\Models\UserModel;
 
@@ -70,7 +71,7 @@ class Admin extends BaseController
 			$model = new ProductModel();
 			$data = [
 				'product_name' => $this->seek->getVar('name'),
-				'product_description' => $this->seek->getVar('quantity'),
+				'product_description' => $this->seek->getVar('description'),
 				'product_image' => $image_name,
 				'unit_price' => $this->seek->getVar('price'),
 				'available_quantity' => $this->seek->getVar('quantity'),
@@ -82,6 +83,17 @@ class Admin extends BaseController
 			];
 
 			$model->save($data);
+			$product_id = $model->insertID();
+			$more_data = [
+				'product_image' => $image_name,
+				'product_id' => $product_id,
+				'created_at' =>    $date,
+				'updated_at'=>   $date,
+				'added_by'=> 1
+			];
+			$product_image = new ProductImageModel();
+			$product_image->save($more_data);
+
 			return "success";
 		}
 	}
