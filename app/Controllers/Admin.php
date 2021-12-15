@@ -62,8 +62,8 @@ class Admin extends BaseController
 		$this->seek= service('request');
 		$destination = '/assets/images';
 		$image = $this->seek->getFile('image');
-		$image_name = $image->getName();
-		$image->move($destination, $image_name);
+		$image_name = $image->getRandomName();
+		$image->move(ROOTPATH."public/media", $image_name);
 
 		helper(['form']);
 		if($this->request->getMethod() == 'post'){
@@ -71,7 +71,7 @@ class Admin extends BaseController
 			$data = [
 				'product_name' => $this->seek->getVar('name'),
 				'product_description' => $this->seek->getVar('quantity'),
-				'product_image' => $image->getClientName(),
+				'product_image' => $image_name,
 				'unit_price' => $this->seek->getVar('price'),
 				'available_quantity' => $this->seek->getVar('quantity'),
 				'subcategory_id' => $this->seek->getVar('subcategory'),
