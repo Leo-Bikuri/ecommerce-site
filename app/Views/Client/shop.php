@@ -21,8 +21,8 @@
             <?php 
             if(!empty($products)){
                 foreach($products as $product){?>
-                <div onclick="window.location.href='sproduct.html';" class="product col-lg-3 col-md-4 col-12 text-center">
-                    <img class="mb-3 img-fluid" src="/media/shirt.jpg" alt="">
+                <div onclick="window.location.href='/product/<?= $product['product_id']?>';" class="product col-lg-3 col-md-4 col-12 text-center">
+                    <img class="img-fluid img-center image-height" src="/media/<?= $product['product_image']?>" alt="">
                     <div class="star">
                         <i class="fas fa-star"></i>
                         <i class="fas fa-star"></i>

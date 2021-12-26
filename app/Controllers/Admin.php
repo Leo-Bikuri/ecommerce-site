@@ -31,7 +31,7 @@ class Admin extends BaseController
 		$data['categories'] = $categories;
 		
 		$model = new ProductModel();
-		$data['products'] = $model->paginate();
+		$data['products'] = json_decode(json_encode($model->paginate()), true);
 		$data['pager'] = $model->pager;
 		echo view('Admin/sidebar');
 		echo view('Admin/inventory', $data);
@@ -57,11 +57,8 @@ class Admin extends BaseController
 
 	protected $seek;
 	public function additem(){
-		date_default_timezone_set('Africa/Nairobi');
-		$date = date('Y-m-d H:i:s');
 
 		$this->seek= service('request');
-		$destination = '/assets/images';
 		$image = $this->seek->getFile('image');
 		$image_name = $image->getRandomName();
 		$image->move(ROOTPATH."public/media", $image_name);
@@ -76,25 +73,21 @@ class Admin extends BaseController
 				'unit_price' => $this->seek->getVar('price'),
 				'available_quantity' => $this->seek->getVar('quantity'),
 				'subcategory_id' => $this->seek->getVar('subcategory'),
-				'created_at' =>    $date,
-				'updated_at'=>   $date,
 				'added_by'=> 1
 
 			];
 
 			$model->save($data);
-			$product_id = $model->insertID();
+			$product_id =(int) $model->insertID();
 			$more_data = [
 				'product_image' => $image_name,
 				'product_id' => $product_id,
-				'created_at' =>    $date,
-				'updated_at'=>   $date,
 				'added_by'=> 1
 			];
 			$product_image = new ProductImageModel();
 			$product_image->save($more_data);
 
-			return "success";
+			return 'success';
 		}
 	}
 

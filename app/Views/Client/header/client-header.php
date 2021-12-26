@@ -48,7 +48,7 @@
         }
         .product img {
             width: 100%;
-            height: auto;
+            height: 375px;
             box-sizing: border-box;
             object-fit: cover;
         }
@@ -64,6 +64,9 @@
         
         .pagination a {
             color: #000;
+        }
+        .image-height{
+            height: 380px;
         }
         
     </style>

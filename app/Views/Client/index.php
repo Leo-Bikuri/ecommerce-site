@@ -8,12 +8,9 @@
 
     <section id="brand" class="container">
         <div class="row m-0 py-5">
-            <img class="img-fluid col-lg-2 col-md-4 col-6" src="/assets/images/brands/1.png" alt="">
-            <img class="img-fluid col-lg-2 col-md-4 col-6" src="/assets/images/brands/2.png" alt="">
-            <img class="img-fluid col-lg-2 col-md-4 col-6" src="/assets/images/brands/3.png" alt="">
-            <img class="img-fluid col-lg-2 col-md-4 col-6" src="/assets/images/brands/4.png" alt="">
-            <img class="img-fluid col-lg-2 col-md-4 col-6" src="/assets/images/brands/5.png" alt="">
-            <img class="img-fluid col-lg-2 col-md-4 col-6" src="/assets/images/brands/6.png" alt="">
+            <div class="col d-flex justify-content-center">
+            <img class="img-fluid col-lg-2 col-md-4 col-6" src="/assets/images/Untitled.png" alt="">
+            </div>
         </div>
     </section>
 

@@ -60,12 +60,14 @@
 <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 <script src="/jquery-validation-1.19.1/dist/jquery.validate.js"></script>
 <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
     function popup(){
         document.querySelector('.popup').style.display = "flex";
     }
     function close_popup(){
         document.querySelector('.popup').style.display = "none";
+        document.location.reload('false');
     }
 
     $(function() {
@@ -116,12 +118,28 @@
                     contentType: false, 
                     processData: false,
                     success: function(response){
-                        if(response === "success"){
-                        alert('Item added successfully');
-                        document.getElementById('additem-form').reset();
+                        if(response == "success"){
+                        Swal.fire({
+                            position: 'center',
+                            icon: 'success',
+                            title: 'Product Added Successfully',
+                            timer: 1500,
+                            showConfirmButton: false,
+                            allowOutsideClick:false,
+                            timerProgressBar: true,
+                        }).then(() => {
+                                document.getElementById('additem-form').reset();
+                            })
                         }else{
-                            alert('Server error');
-                            document.getElementById('additem-form').reset();
+                           Swal.fire({
+                            position: 'center',
+                            icon: 'error',
+                            title: 'Internal Server Error',
+                            timer: 1500,
+                            showConfirmButton: false,
+                            allowOutsideClick:false,
+                            timerProgressBar: true,
+                           })
                         }
                     }
                  });

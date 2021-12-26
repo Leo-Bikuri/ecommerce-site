@@ -47,7 +47,7 @@ $routes->get('/Login', 'Login::index');
 $routes->get('/home', 'Client::index');
 $routes->get('/shop/(:num)', 'Client::shop/$1');
 $routes->get('/cart', 'Client::cart');
-$routes->get('/product', 'Client::sproduct');
+$routes->get('/product/(:num)', 'Client::sproduct/$1');
 $routes->get('/shop-subcategory/(:num)', 'Client::shop_subcategories/$1');
 
 // $routes->get('/profile', 'ProfileController::index',['filter' => 'authGuard']);

@@ -33,7 +33,7 @@ class Client extends BaseController
             $ids[$x]= $subCategory['subcategory_id'];
             $x++;
         }
-        $data['products'] = $p_model->whereIn('subcategory_id', $ids)->paginate();
+        $data['products'] = json_decode(json_encode($p_model->whereIn('subcategory_id', $ids)->paginate()), true);
         $data['pager'] = $p_model->pager;
         $data['subcategories'] = $subCategories;
         echo view('Client/header/client-header', $this->getCategories());
@@ -44,7 +44,8 @@ class Client extends BaseController
         $p_model = new ProductModel();
         $s_model = new SubcategoriesModel();
         $subCategories = json_decode(json_encode($s_model->getWhere(['category'=>session()->get('id')])->getResult()), true);
-        $data['products'] = $p_model->whereIn('subcategory_id', [$id])->paginate();
+        $data['products'] = json_decode(json_encode($p_model->whereIn('subcategory_id', [$id])->paginate()), true);
+        shuffle($data['products']);
         $data['pager'] = $p_model->pager;
         $data['subcategories'] = $subCategories;
         echo view('Client/header/client-header', $this->getCategories());
@@ -54,9 +55,13 @@ class Client extends BaseController
         echo view('Client/header/client-header', $this->getCategories());
 		echo view('Client/cart');
     }
-    public function sproduct(){
+    public function sproduct($id = NULL){
+        $product_model = new ProductModel();
+        $data['product'] = json_decode(json_encode($product_model->getWhere(['product_id'=>$id])->getResult()), true);
+        $data['related_products'] = json_decode(json_encode($product_model->getWhere(['subcategory_id'=>$data['product'][0]['subcategory_id']])->getResult()), true);
+        shuffle($data['related_products']);
         echo view('Client/header/client-header', $this->getCategories());
-		echo view('Client/sproduct');
+		echo view('Client/sproduct', $data);
     }
 }
 

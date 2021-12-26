@@ -1,9 +1,9 @@
     <section class="container sproduct my-5 pt-5">
         <div class="row mt-5">
             <div class="col-lg-5 col-md-12 col-12">
-                <img class="img-fluid w-100 pb-1" src="img/shop/1.jpg" id="MainImg" alt="">
+                <img class="img-fluid w-100 pb-1" src="/media/<?= $product[0]['product_image']?>" id="MainImg" alt="">
 
-                <div class="small-img-group">
+                <!-- <div class="small-img-group">
                     <div class="small-img-col">
                         <img src="img/shop/1.jpg" width="100%" class="small-img" alt="">
                     </div>
@@ -16,24 +16,24 @@
                     <div class="small-img-col">
                         <img src="img/shop/26.jpg" width="100%" class="small-img" alt="">
                     </div>
-                </div>
+                </div> -->
             </div>
 
             <div class="col-lg-6 col-md-12 col-12">
-                <h6>Home / T-Shirt</h6>
-                <h3 class="py-4">Men's Fashion T Shirt</h3>
-                <h2>20000</h2>
+                <h6>Shop /<?=$product[0]['product_name']?></h6>
+                <h3 class="py-4"><?=$product[0]['product_name']?></h3>
+                <h2><?=$product[0]['unit_price']." KSH" ?></h2>
                 <select class="my-3">
                   <option>Select Size</option>
-                  <option>XL</option>
                   <option>XXL</option>
-                  <option>Small</option>
+                  <option>XL</option>
                   <option>Large</option>
+                  <option>Small</option>
                 </select>
                 <input type="number" value="1">
                 <button class="buy-btn">Add To Cart</button>
                 <h4 class="mt-5 mb-4">Product Details</h4>
-                <span>The Gildan Ultra Cotton T-shirt is made from a substantial 6.0 oz. per sq. yd. fabric constructed from 100% cotton, this classic fit preshrunk jersey knit provides unmatched comfort with each wear. Featuring a taped neck and shoulder, and a seamless double-needle collar, and available in a range of colors, it offers it all in the ultimate head-turning package.</span>
+                <span><?= $product[0]['product_description']?></span>
             </div>
         </div>
     </section>
@@ -44,8 +44,13 @@
             <hr class="mx-auto">
         </div>
         <div class="row mx-auto container-fluid">
-            <div class="product text-center col-lg-3 col-md-4 col-12">
-                <img class="img-fluid mb-3" src="img/featured/1.jpg" alt="">
+            <?php $x = 0; foreach($related_products as $related_product){
+                if($related_product['product_id'] != $product[0]['product_id'] && $x < 4){
+                    $x++
+                ?>
+
+            <div class="product text-center col-lg-3 col-md-4 col-12" onclick="window.location.href='/product/<?= $related_product['product_id']?>';">
+                <img class="img-fluid mb-3" src="/media/<?= $related_product['product_image']?>" alt="">
                 <div class="star">
                     <i class="fas fa-star"></i>
                     <i class="fas fa-star"></i>
@@ -53,49 +58,11 @@
                     <i class="fas fa-star"></i>
                     <i class="fas fa-star"></i>
                 </div>
-                <h5 class="p-name">Sport Boots</h5>
-                <h4 class="p-price">$92.00</h4>
+                <h5 class="p-name"><?= $related_product['product_name']?></h5>
+                <h4 class="p-price"><?= $related_product['unit_price']." KSH"?></h4>
                 <button class="buy-btn">Buy Now</button>
             </div>
-            <div class="product text-center col-lg-3 col-md-4 col-12">
-                <img class="img-fluid mb-3" src="img/featured/2.jpg" alt="">
-                <div class="star">
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                </div>
-                <h5 class="p-name">Sport Boots</h5>
-                <h4 class="p-price">$92.00</h4>
-                <button class="buy-btn">Buy Now</button>
-            </div>
-            <div class="product text-center col-lg-3 col-md-4 col-12">
-                <img class="img-fluid mb-3" src="img/featured/3.jpg" alt="">
-                <div class="star">
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                </div>
-                <h5 class="p-name">Sport Boots</h5>
-                <h4 class="p-price">$92.00</h4>
-                <button class="buy-btn">Buy Now</button>
-            </div>
-            <div class="product text-center col-lg-3 col-md-4 col-12">
-                <img class="img-fluid mb-3" src="img/featured/4.jpg" alt="">
-                <div class="star">
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                </div>
-                <h5 class="p-name">Sport Boots</h5>
-                <h4 class="p-price">$92.00</h4>
-                <button class="buy-btn">Buy Now</button>
-            </div>
+            <?php } }?>
         </div>
     </section>
 
