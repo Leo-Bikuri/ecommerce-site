@@ -9,6 +9,7 @@ use App\Models\UserModel;
 
 class Client extends BaseController
 {
+    protected $seek;
     public static function getCategories(){
         $model = new CategoriesModel();
         $data['categories'] = $model->findAll();
@@ -52,8 +53,10 @@ class Client extends BaseController
         echo view('Client/shop', $data);
     }
     public function cart(){
+        $cart = \Config\Services::cart();
+        $data['orders'] = $cart->contents(); 
         echo view('Client/header/client-header', $this->getCategories());
-		echo view('Client/cart');
+		echo view('Client/cart', $data);
     }
     public function sproduct($id = NULL){
         $product_model = new ProductModel();
@@ -62,6 +65,45 @@ class Client extends BaseController
         shuffle($data['related_products']);
         echo view('Client/header/client-header', $this->getCategories());
 		echo view('Client/sproduct', $data);
+    }
+    public function add_to_cart(){
+        $this->seek = service('request');
+        $data = array(
+            'id' => $this->seek->getVar('item-id'),
+            'qty' =>$this->seek->getVar('quantity'),
+            'price' => (int) $this->seek->getVar('price'),
+            'name' => $this->seek->getVar('item'),
+            'options'=> array('image' => $this->seek->getVar('image'), 'size'=>$this->seek->getVar('size'))
+        );
+        
+        $cart = \Config\Services::cart();
+        if($cart->insert($data)){
+            session()->set('items',$cart->totalItems());
+            return "success";
+        }else{
+            return 'fail';
+        }
+    }
+    public function empty_cart(){
+        $cart = \Config\Services::cart();
+        $cart->destroy();
+        session()->remove('items');
+    }
+    public function cart_delete($rowid = NULL){
+        $cart = \Config\Services::cart();
+        $cart->remove($rowid);
+        session()->set('items', $cart->totalItems());
+        return redirect()->back();
+    }
+    public function update_cart($rowid = NULL){
+        $this->seek = service('request');
+        $cart = \Config\Services::cart();
+        $cart->update(array(
+            'rowid'=> $rowid,
+            'qty' => $this->seek->getVar('quantity')
+        ));
+        session()->set('items', $cart->totalItems());
+        return "success";
     }
 }
 

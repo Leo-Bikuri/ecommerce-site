@@ -1,3 +1,6 @@
+    <?php 
+     $cart = \Config\Services::cart();
+    ?>
     <section id="cart" class="container pt-5">
         <h2 class="font-weight-bold pt-5 mt-5">Shopping Cart</h2>
         <hr>
@@ -16,48 +19,22 @@
                 </tr>
             </thead>
             <tbody>
+            <?php foreach($orders as $order){?>
                 <tr>
-                    <td><a href="#0"><i class="fas fa-trash-alt"></i></a></td>
-                    <td><img src="img/shoes/1.jpg" alt=""></td>
+                    <td><a href="/cart_delete/<?=$order['rowid']?>"><i class="fas fa-trash-alt"></i></a></td>
+                    <td><img src="/media/<?= $order['options']['image']?>" alt=""></td>
                     <td>
-                        <h5>Handbag Fringilla</h5>
+                        <h5><?= $order['name']?></h5>
                     </td>
                     <td>
-                        <h5>$65</h5>
+                        <h5><?= "KSH ".$order['price']?></h5>
                     </td>
-                    <td><input class="w-25 pl-1" type="number" value="1"></td>
+                    <td><input class="w-25 pl-1" type="number" id="quantity" min="1" onchange="changeQuantity('<?=$order['rowid']?>', value)" value="<?= $order['qty'] ?>"></td>
                     <td>
-                        <h5>$130.00 </h5>
+                        <h5>KSH<?= " ".$order['subtotal']?> </h5>
                     </td>
                 </tr>
-                <tr>
-                    <td><a href="#0"><i class="fas fa-trash-alt"></i></a></td>
-                    <td><img src="img/shoes/2.jpg" alt=""></td>
-                    <td>
-                        <h5>Handbag Fringilla</h5>
-                    </td>
-                    <td>
-                        <h5>$65</h5>
-                    </td>
-                    <td><input class="w-25 pl-1" type="number" value="1"></td>
-                    <td>
-                        <h5>$130.00 </h5>
-                    </td>
-                </tr>
-                <tr>
-                    <td><a href="#0"><i class="fas fa-trash-alt"></i></a></td>
-                    <td><img src="img/shoes/3.jpg" alt=""></td>
-                    <td>
-                        <h5>Handbag Fringilla</h5>
-                    </td>
-                    <td>
-                        <h5>$65</h5>
-                    </td>
-                    <td><input class="w-25 pl-1" type="number" value="1"></td>
-                    <td>
-                        <h5>$130.00 </h5>
-                    </td>
-                </tr>
+                <?php }?>
             </tbody>
         </table>
     </section>
@@ -77,16 +54,16 @@
                     <h5>CART TOTAL</h5>
                     <div class="d-flex justify-content-between">
                         <h6>Subtotal</h6>
-                        <p>$215.00 </p>
+                        <p><?= "KSH ".$cart->total()?></p>
                     </div>
                     <div class="d-flex justify-content-between">
                         <h6>Shipping</h6>
-                        <p>$255.00</p>
+                        <p>KSH 200</p>
                     </div>
                     <hr class="second-hr">
                     <div class="d-flex justify-content-between">
                         <h6>Total</h6>
-                        <p>$215.00 </p>
+                        <p><?="KSH "?><?=$cart->total() + 200?> </p>
                     </div>
                     <button class="ml-auto">PROCEED TO CHECKOUT</button>
                 </div>
@@ -165,6 +142,34 @@
 
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js" integrity="sha384-SR1sx49pcuLnqZUnnPwx6FCym0wLsk5JZuNx2bPPENzswTNFaQU1RDvt3wT4gWFG" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.min.js" integrity="sha384-j0CNLUeiqtyaRmlzUHCPZ+Gy5fQu0dQ6eZ/xAww941Ai1SxSY+0EQqNXNE6DZiVc" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+    <script src="/jquery-validation-1.19.1/dist/jquery.validate.js"></script>
+    <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        function changeQuantity(rowid, quantity){
+            console.log(quantity);
+            $.ajax({
+                method: 'post',
+                url: '/update_cart/'+rowid,
+                data: {quantity: quantity},
+                success: function(response){
+                    if(response == "success"){
+                        location.reload();
+                    }else{
+                        Swal.fire({
+                            position: 'center',
+                            icon: 'error',
+                            title: 'Quantity update failed',
+                            timer: 1500,
+                            showConfirmButton: false,
+                            allowOutsideClick:false,
+                            timerProgressBar: true,
+                        })
+                    }
+                }
+            });
+        }
+    </script>
 </body>
-
 </html>

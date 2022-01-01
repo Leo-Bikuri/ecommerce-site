@@ -49,6 +49,9 @@ $routes->get('/shop/(:num)', 'Client::shop/$1');
 $routes->get('/cart', 'Client::cart');
 $routes->get('/product/(:num)', 'Client::sproduct/$1');
 $routes->get('/shop-subcategory/(:num)', 'Client::shop_subcategories/$1');
+$routes->post('/basket', 'Client::add_to_cart');
+$routes->get('/cart_delete/(:alphanum)', 'Client::cart_delete/$1');
+$routes->post('/update_cart/(:alphanum)', 'Client::update_cart/$1');
 
 // $routes->get('/profile', 'ProfileController::index',['filter' => 'authGuard']);
 

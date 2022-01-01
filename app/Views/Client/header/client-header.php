@@ -68,6 +68,15 @@
         .image-height{
             height: 380px;
         }
+        .cartcount{
+            background: #fb774b;
+            color: white;
+            border-radius: 100%;
+            height: 22px;
+            width: 25px;
+            text-align: center;
+            transform: translate(-50%, -50%);
+        }
         
     </style>
 
@@ -75,7 +84,7 @@
 
 <body>
     <!-- NAVIGATION -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-white py-3 fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-light bg-white py-3 fixed-top" id="nav">
         <div class="container">
             <h1>&lt;style&gt;</h1>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -104,6 +113,16 @@
                     <li class="nav-item">
                         <i class="fal fa-search"></i>
                         <i onclick="window.location.href='/cart';" class="fal fa-shopping-bag"></i>
+                    </li>
+                    <li class="nav-item">
+                    <div class="cartcount">
+                            <p id="cartcount"><?php
+                            if(session()->has('items')){
+                            echo session()->get('items');
+                            }else{
+                                echo 0;
+                            }?></p>
+                        </div>
                     </li>
 
             </div>
