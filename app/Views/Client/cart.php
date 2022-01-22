@@ -58,7 +58,7 @@
                     </div>
                     <div class="d-flex justify-content-between">
                         <h6>Shipping</h6>
-                        <p>KSH 200</p>
+                        <p>FREE</p>
                     </div>
                     <hr class="second-hr">
                     <div class="d-flex justify-content-between">

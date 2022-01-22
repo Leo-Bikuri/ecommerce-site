@@ -29,7 +29,6 @@ class Client extends BaseController
         $s_model = new SubcategoriesModel();
         $subCategories = json_decode(json_encode($s_model->getWhere(['category'=>$id])->getResult()), true);
         $x=0;
-        // dd($subCategories);
         foreach($subCategories as $subCategory){
             $ids[$x]= $subCategory['subcategory_id'];
             $x++;
@@ -104,6 +103,11 @@ class Client extends BaseController
         ));
         session()->set('items', $cart->totalItems());
         return "success";
+    }
+    public function checkout(){
+        $cart = \Config\Services::cart();
+        $data['cart'] = $cart->contents();
+        echo view('Client/checkout.php',$data);
     }
 }
 

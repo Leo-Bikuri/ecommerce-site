@@ -31,7 +31,7 @@
                         <i class="fas fa-star"></i>
                     </div>
                     <h5 class="p-name"><?= $product['product_name']?></h5>
-                    <h4 class="p-price"><?= $product['unit_price']?></h4>
+                    <h4 class="p-price"><?= "KSH ".$product['unit_price']?></h4>
                     <button class="buy-btn">Buy Now</button>
                 </div>
                 <?php } ?> 

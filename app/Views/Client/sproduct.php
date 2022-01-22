@@ -27,8 +27,11 @@
                     <option>Select Size</option>
                     <option>XXL</option>
                     <option>XL</option>
-                    <option>Large</option>
-                    <option>Small</option>
+                    <option>M</option>
+                    <option>L</option>
+                    <option>S</option>
+                    <option>XS</option>
+                    <option>XXS</option>
                     </select>
                     <input type="number" min="1" name="quantity" value="1">
                     <input type="hidden" name = "item-id" value="<?= $product[0]['product_id'] ?>" >
