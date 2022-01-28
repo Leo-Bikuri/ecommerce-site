@@ -8,7 +8,9 @@
 		"php": "^7.2 || ^8.0",
 		"codeigniter4/framework": "^4",
 		"twbs/bootstrap-icons": "^1.6",
-		"jason-napolitano/codeigniter4-cart-module": "^1.1"
+		"jason-napolitano/codeigniter4-cart-module": "^1.1",
+		"stripe/stripe-php": "^7.111",
+		"firebase/php-jwt": "^6.0"
 	},
 	"require-dev": {
 		"fakerphp/faker": "^1.9",

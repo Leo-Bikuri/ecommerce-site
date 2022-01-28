@@ -12,11 +12,21 @@
     </section>
     <section id="featured">
         <div class="container">
+        <div class="dropdown" style="float:right;">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
+                Sort by:
+            </button>
+            <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton2">
+                <li><a class="dropdown-item" href="#">Newest arrivals</a></li>
+                <li><a class="dropdown-item" href="#">Price: Low to High</a></li>
+                <li><a class="dropdown-item" href="#">Price: High to Low</a></li>
+            </ul>
+        </div>
             <h2 class="font-weight-bold">Clothes Featured</h2>
             <hr>
             <p>All our products with a fair price only on &lt;style&gt;.</p>
         </div>
-        <div class="row mx-auto container">
+        <div class="row mx-auto container" id="products-body">
             
             <?php 
             if(!empty($products)){
@@ -125,6 +135,52 @@
 
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js" integrity="sha384-SR1sx49pcuLnqZUnnPwx6FCym0wLsk5JZuNx2bPPENzswTNFaQU1RDvt3wT4gWFG" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.min.js" integrity="sha384-j0CNLUeiqtyaRmlzUHCPZ+Gy5fQu0dQ6eZ/xAww941Ai1SxSY+0EQqNXNE6DZiVc" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+    <script>
+        // function sortNewestFirst(){
+        //     <?php 
+        //         $keys = array_column($products, 'created_at');
+        //         array_multisort($keys, SORT_DESC, $products);
+        //     ?>
+        //     var sorted = <?php echo json_encode($products) ?>;
+        //     console.log(sorted);
+        //     var products = "";
+        //     $.each(sorted, function(index, item){
+        //         var product = '<div onclick="window.location.href=\'/product/'+item.product_id+'\'" class="product col-lg-3 col-md-4 col-12 text-center"><img class="img-fluid img-center image-height" src="/media/'+item.product_image+'" alt=""><div class="star"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div><h5 class="p-name">'+item.product_name+'</h5><h4 class="p-price">'+item.unit_price+'</h4><button class="buy-btn">Buy Now</button></div>';
+        //           products += product;
+        //         });
+        //         $('#products-body').html(products);
+            
+        // }
+        // function sortPriceLtoH(){
+        //     <?php 
+        //         $keys = array_column($products, 'unit_price');
+        //         array_multisort($keys, SORT_ASC, $products);
+        //     ?>
+        //     var sorted = <?php echo json_encode($products) ?>;
+        //     console.log(sorted);
+        //     var products = "";
+        //     $.each(sorted, function(index, item){
+        //           var product = '<div onclick="window.location.href=\'/product/'+item.product_id+'\'" class="product col-lg-3 col-md-4 col-12 text-center"><img class="img-fluid img-center image-height" src="/media/'+item.product_image+'" alt=""><div class="star"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div><h5 class="p-name">'+item.product_name+'</h5><h4 class="p-price">'+item.unit_price+'</h4><button class="buy-btn">Buy Now</button></div>';
+        //           products += product;
+        //         });
+        //         $('#products-body').html(products);
+        // }
+        // function sortPriceHtoL(){
+        //     <?php 
+        //         $keys = array_column($products, 'unit_price');
+        //         array_multisort($keys, SORT_DESC, $products);
+        //     ?>
+        //     var sorted = <?php echo json_encode($products) ?>;
+        //     console.log(sorted);
+        //     var products = "";
+        //     $.each(sorted, function(index, item){
+        //         var product = '<div onclick="window.location.href=\'/product/'+item.product_id+'\'" class="product col-lg-3 col-md-4 col-12 text-center"><img class="img-fluid img-center image-height" src="/media/'+item.product_image+'" alt=""><div class="star"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div><h5 class="p-name">'+item.product_name+'</h5><h4 class="p-price">'+item.unit_price+'</h4><button class="buy-btn">Buy Now</button></div>';
+        //           products += product;
+        //         });
+        //         $('#products-body').html(products);
+        // }
+    </script>
 </body>
 
 </html>

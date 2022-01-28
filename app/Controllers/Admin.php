@@ -4,11 +4,13 @@ namespace App\Controllers;
 use App\Models\getCategories;
 use App\Models\ProductModel;
 use App\Models\ProductImageModel;
+use App\Models\RoleModel;
 use App\Models\CategoriesModel;
 use App\Models\UserModel;
 
 class Admin extends BaseController
 {
+
 	public function index()
 	{
 		echo view('Admin/sidebar');
@@ -17,10 +19,16 @@ class Admin extends BaseController
 	public function administrators(){
 		$data = [];
 		$model = new UserModel();
-		$data['admins'] = json_decode(json_encode($model->whereIn('role',[2])->paginate()), true);
+		$data['admins'] = $model->whereIn('role',[2])->paginate();
 		$data['pager'] = $model->pager;
-		echo view('Admin/sidebar');
-		echo view('Admin/administrators', $data);
+		echo view('A/header/header');
+		echo view('A/administrators', $data);
+	}
+	public function getAdministrator($id = null){
+		$model = new UserModel();
+		$data['admin'] = $model->getWhere(['user_id'=> $id])->getFirstRow('array');
+		echo view('A/header/header');
+		echo view('A/user', $data);
 	}
 	public function inventory(){
 		$data = [];
@@ -31,7 +39,8 @@ class Admin extends BaseController
 		$data['categories'] = $categories;
 		
 		$model = new ProductModel();
-		$data['products'] = json_decode(json_encode($model->paginate()), true);
+		$data['products'] = $model->paginate();
+
 		$data['pager'] = $model->pager;
 		echo view('Admin/sidebar');
 		echo view('Admin/inventory', $data);
@@ -146,16 +155,49 @@ class Admin extends BaseController
 	public function customers(){
 		$data = [];
 		$model = new UserModel();
-		$data['clients'] = json_decode(json_encode($model->whereIn('role',[1])->paginate()), true);
+		$data['clients'] = $model->whereIn('role',[1])->paginate();
 
 		$data['pager'] = $model->pager;
 		echo view('Admin/sidebar');
 		echo view('Admin/customers', $data);
 	}
+	public function delete($id = null){
+		$model = new UserModel();
+		if($model->where('user_id', $id)->delete()){
+			return "success";
+		}else{
+			return $model->error();
+		}
+
+	}
+	public function update($id = null){
+		$this->seek= service('request');
+		$model = new UserModel();
+		$data = $this->seek->getVar();
+		$data['user_id'] = $id;
+		if($this->seek->getVar('password')){
+			if($model->save($data)){
+				return "success";
+			}else{
+				return $model->errors();
+			}
+		}elseif($this->seek->getVar('first_name')){
+			$data['password'] = password_hash($this->seek->getVar('password'), PASSWORD_DEFAULT);
+			if($model->save($data)){
+				return "success";
+			}else{
+				return $model->errors();
+			}
+		}
+	}
 
 	public function test(){
-		echo view('Admin/sidebar');
-		echo view('Admin/edit-item');
+		$data = [];
+		$model = new UserModel();
+		$data['admins'] = json_decode(json_encode($model->whereIn('role',[2])->paginate()), true);
+		$data['pager'] = $model->pager;
+		echo view('A/header/header');
+		echo view('A/user', $data);
 	}
 }
 

@@ -43,15 +43,39 @@ $routes->get('/', 'Registration::index');
 $routes->get('/Registration', 'Registration::index');
 $routes->get('/Login', 'Login::index');
 
+//Admin routes
+$routes->get('/administrators', 'Admin::administrators');
+$routes->get('/administrators/delete/(:num)', 'Admin::delete/$1');
+$routes->get('/administrator/(:num)', 'Admin::getAdministrator/$1');
+$routes->post('/administrator/update/(:num)', 'Admin::update/$1');
+
 //Client routes
 $routes->get('/home', 'Client::index');
-$routes->get('/shop/(:num)', 'Client::shop/$1');
+$routes->get('/shop/(:alphanum)', 'Client::shop/$1');
 $routes->get('/cart', 'Client::cart');
 $routes->get('/product/(:num)', 'Client::sproduct/$1');
-$routes->get('/shop-subcategory/(:num)', 'Client::shop_subcategories/$1');
+$routes->get('/shop-subcategory/(:alphanum)', 'Client::shop_subcategories/$1');
 $routes->post('/basket', 'Client::add_to_cart');
 $routes->get('/cart_delete/(:alphanum)', 'Client::cart_delete/$1');
 $routes->post('/update_cart/(:alphanum)', 'Client::update_cart/$1');
+
+//Payment routes
+$routes->get('/payment-stripe', 'StripeController::index');
+$routes->post('/payment', 'StripeController::stripePayment');
+
+
+//API routes
+$routes->group('api', ["namespace"=>"App\Controllers\API"], function($routes){
+	$routes->post("register", "Auth::register");
+	$routes->post("login", "Auth::login");
+	$routes->get("profile", "Auth::details");
+});
+
+$routes->group('api',  ["namespace"=>"App\Controllers\API"], function($routes){
+	$routes->resource('user', ['only' => ['index', 'create', 'show']]);
+});
+
+
 
 // $routes->get('/profile', 'ProfileController::index',['filter' => 'authGuard']);
 

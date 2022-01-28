@@ -9,7 +9,7 @@ class ProductModel extends Model{
     protected $table = 'tbl_product';
     protected $primaryKey = 'product_id';
     protected $useAutoIncrement = true;
-    protected $returnType = 'object';
+    protected $returnType = 'array';
 
     protected $useTimestamps = true;
     protected $createdField  = 'created_at';
@@ -26,6 +26,4 @@ class ProductModel extends Model{
         'updated_at',
         'added_by'
     ];
-
-    
 }

@@ -174,3 +174,6 @@ ul.pagination{
 .nav-link:hover{
     cursor: pointer;
 }
+.table_row:hover{
+    background-color: #3957a2;
+}

@@ -9,7 +9,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/assets/css/checkout.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/paginationjs/2.1.4/pagination.css"/>
-    <title>Document</title>
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" />
+    <title>Style - Checkout</title>
 </head>
 <body>
     <div class="cont">
@@ -41,15 +42,15 @@
         <div class="card-disp">
           <div class="card-user-show">
             <i class="cardtypei fab"></i>
-            <span class="cd-dsp-txt expiresend">Expires end</span>
-            <span class="cd-dsp-txt cardholder">Card holder</span>
+            <span class="cd-dsp-txt expiresend" id = 'expiry'>Expires end</span>
+            <span class="cd-dsp-txt cardholder" id="card_holder">Card holder</span>
             
             <div class="cd-inf-txt cardnumber"></div>
             <div class="cd-inf-txt expiresend"></div>
             <div class="cd-inf-txt cardholder"></div>
           </div>
           <div class="card-input-area">
-            <form>
+            <form action = "" method = "POST">
               <div class="fgroup fullname">
                 <label for="fullname">Full name <span>*</span></label>
                 <input placeholder="John Smith, etc." type="text" name="fullname" id="fullname" />
@@ -71,13 +72,13 @@
                    <option value='11'>11</option>
                    <option value='12'>12</option>
                  </select> 
-                 <select name='expireYY' id='expireYY'>
+                 <select name='expireYY' id='expireYY>
                    <option disabled value=''>Year</option>
-                   <option value='21'>2021</option>
                    <option value='22'>2022</option>
                    <option value='23'>2023</option>
                    <option value='24'>2024</option>
                    <option value='25'>2025</option>
+                   <option value='26'>2026</option>
                  </select> 
               </div>
               <div class="fgroup cnumber">
@@ -92,15 +93,15 @@
                   <input id="ccv" name="ccv" placeholder="123" />
                 </div>
               </div>
-            </form>
-          </div>
-          <div class="card-next-aera">
+              <div class="card-next-aera">
             <div class="btns">
-              <div class="btn btn-1">Continue to payment</div>
+              <button class="btn btn-1"  onclick="handlePayment(1000);">Continue to payment</button>
             </div>
           </div>
+            </form>
+          </div>
         </div>
-      </div> 
+  </div> 
       <?php $data = []; foreach($cart as $cart){
           $data[] = array(
             'id' => $cart['id'],
@@ -112,9 +113,9 @@
           );
         } 
         $data = json_encode($data);
-        ?>;
+        ?>
   
-      <script src="/js/checkout.js"></script>
+      <script type="module" src="/js/checkout.js"></script>
       <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/paginationjs/2.1.4/pagination.min.js"></script>
       <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js" integrity="sha384-SR1sx49pcuLnqZUnnPwx6FCym0wLsk5JZuNx2bPPENzswTNFaQU1RDvt3wT4gWFG" crossorigin="anonymous"></script>
@@ -141,7 +142,34 @@
                 $('#bask-body').html(basket);
             }
         })
-    })
+      })
+
+      function handlePayment(amount){
+        var handler = StripeCheckout.configure({
+          key: 'pk_test_51KL2ppAv3yHCdNvTeRaZr5Ek3glyEeCOGW1lVBFzSjHx0DUMAn44bOulpIJcfR2QDKC3z9DyMe4igfoTrnMHJjMk00frEspLE7',
+          locale: 'auto',
+          token: function(token){
+            console.log('Token Generated' + token);
+            $.ajax({
+              url: '/payment',
+              method: 'post',
+              data: {
+                tokenId: token.id,
+                amount: amount
+              },
+              dataType: "json",
+              success: function(response){
+                console.log(response.data);
+              }
+            })
+          }
+        });
+        handler.open({
+          name: 'Clothe',
+          description: 'something',
+          amount: amount
+        });
+      }
       </script>
 </body>
 </html>

@@ -34,6 +34,7 @@ class Client extends BaseController
             $x++;
         }
         $data['products'] = json_decode(json_encode($p_model->whereIn('subcategory_id', $ids)->paginate()), true);
+        $data['products'] = $this->sortProducts($id, $data['products']);
         $data['pager'] = $p_model->pager;
         $data['subcategories'] = $subCategories;
         echo view('Client/header/client-header', $this->getCategories());
@@ -108,6 +109,24 @@ class Client extends BaseController
         $cart = \Config\Services::cart();
         $data['cart'] = $cart->contents();
         echo view('Client/checkout.php',$data);
+    }
+    public function sortProducts($sort, $products){
+        if($sort = "price_desc"){
+            $keys = array_column($products, 'unit_price');
+            array_multisort($keys, SORT_DESC, $products);
+            return $products;
+        }elseif($sort = "price_asc"){
+            $keys = array_column($products, 'unit_price');
+            array_multisort($keys, SORT_ASC, $products);
+            return $products;
+        }elseif($sort = "date_asc"){
+            $keys = array_column($products, 'created_at');
+            array_multisort($keys, SORT_DESC, $products);
+            return $products;
+        }else{
+            return $products;
+        }
+        
     }
 }
 
