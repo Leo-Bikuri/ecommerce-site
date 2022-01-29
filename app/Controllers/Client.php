@@ -28,14 +28,19 @@ class Client extends BaseController
         // if(!is_string($uri->setSilent()->getSegment(3)){
         //     $subcategory_id = $uri->setSilent()->getSegment(3);
         // }
-        if(is_string($uri->setSilent()->getSegment(3)) || $uri->setSilent()->getSegment(3) == ""){
-            $subcategory_id = "";
-        }else{
+        if(is_numeric($uri->setSilent()->getSegment(3)) || $uri->setSilent()->getSegment(3) == ""){
             $subcategory_id = $uri->setSilent()->getSegment(3);
+        }else{
+            $subcategory_id = "";
         }
         $sort = $uri->setSilent()->getSegment(4);
         if($sort == ""){
-            $sort = $uri->setSilent()->getSegment(3);
+            if(is_numeric($uri->setSilent()->getSegment(3))){
+            $sort = "";
+            }else{
+                $sort = $uri->setSilent()->getSegment(3);
+            }
+            
         }
         // dd($sort);
         $data = $this->getProducts($category_id, $subcategory_id, $sort);
@@ -142,7 +147,7 @@ class Client extends BaseController
             'qty' =>$this->seek->getVar('quantity'),
             'price' => (int) $this->seek->getVar('price'),
             'name' => $this->seek->getVar('item'),
-            'options'=> array('image' => $this->seek->getVar('image'), 'size'=>$this->seek->getVar('size'))
+            'options'=> array('image' => $this->seek->getVar('image'))
         );
         
         $cart = \Config\Services::cart();
@@ -177,25 +182,12 @@ class Client extends BaseController
     public function checkout(){
         $cart = \Config\Services::cart();
         $data['cart'] = $cart->contents();
-        echo view('Client/checkout.php',$data);
+        return view('Client/checkout.php',$data);
     }
-    public function sortProducts($sort, $products){
-        if($sort = "price_desc"){
-            $keys = array_column($products, 'unit_price');
-            array_multisort($keys, SORT_DESC, $products);
-            return $products;
-        }elseif($sort = "price_asc"){
-            $keys = array_column($products, 'unit_price');
-            array_multisort($keys, SORT_ASC, $products);
-            return $products;
-        }elseif($sort = "date_asc"){
-            $keys = array_column($products, 'created_at');
-            array_multisort($keys, SORT_DESC, $products);
-            return $products;
-        }else{
-            return $products;
-        }
-        
+    public function thanks(){
+        $cart = $cart = \Config\Services::cart();
+        $data['orders'] = $cart->contents();
+        echo view('Client/pdf', $data);
     }
 }
 

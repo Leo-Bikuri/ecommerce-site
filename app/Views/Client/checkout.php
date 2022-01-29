@@ -10,7 +10,13 @@
     <link rel="stylesheet" href="/assets/css/checkout.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/paginationjs/2.1.4/pagination.css"/>
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
     <title>Style - Checkout</title>
+    <style>
+      .hide{
+        display: none;
+      }
+    </style>
 </head>
 <body>
     <div class="cont">
@@ -50,10 +56,11 @@
             <div class="cd-inf-txt cardholder"></div>
           </div>
           <div class="card-input-area">
-            <form action = "" method = "POST">
+            <form action = "/payment" method = "POST"  class="require-validation" data-cc-on-file="false" data-stripe-publishable-key="<?= STRIPE_KEY ?>" id="payment-form">
               <div class="fgroup fullname">
                 <label for="fullname">Full name <span>*</span></label>
                 <input placeholder="John Smith, etc." type="text" name="fullname" id="fullname" />
+                <input type="hidden" name="amount" value = "<?= $items->total() ?>">
               </div>
               <div class="fgroup expire">
                 <label for="expireMM">Expiry date <span>*</span></label>
@@ -72,7 +79,7 @@
                    <option value='11'>11</option>
                    <option value='12'>12</option>
                  </select> 
-                 <select name='expireYY' id='expireYY>
+                 <select name='expireYY' id='expireYY'>
                    <option disabled value=''>Year</option>
                    <option value='22'>2022</option>
                    <option value='23'>2023</option>
@@ -81,21 +88,24 @@
                    <option value='26'>2026</option>
                  </select> 
               </div>
-              <div class="fgroup cnumber">
+              <div class="fgroup cnumber required">
                 <label for="ccnumber">Card number <span>*</span></label>
                 <div>
                   <input id="ccnumber" name="ccnumber" class="ccnumber" placeholder="####-####-####-####" />
                 </div>
               </div>
-              <div class="fgroup ccv">
+              <div class="fgroup ccv required">
                 <label for="ccv">CCV <span>*</span></label>
                 <div>
                   <input id="ccv" name="ccv" placeholder="123" />
                 </div>
               </div>
+              <div class="card-next-aera error form-group hide">
+              <div class='alert-danger alert'>Please correct the errors and try again.</div>
+          </div>
               <div class="card-next-aera">
             <div class="btns">
-              <button class="btn btn-1"  onclick="handlePayment(1000);">Continue to payment</button>
+              <button class="btn btn-1" type="submit">Continue to payment</button>
             </div>
           </div>
             </form>
@@ -107,7 +117,6 @@
             'id' => $cart['id'],
             'qty'=> $cart['qty'],
             'name'=>$cart['name'],
-            'size'=>$cart['options']['size'],
             'image'=>$cart['options']['image'],
             'subtotal' => $cart['subtotal']
           );
@@ -115,6 +124,7 @@
         $data = json_encode($data);
         ?>
   
+      <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
       <script type="module" src="/js/checkout.js"></script>
       <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/paginationjs/2.1.4/pagination.min.js"></script>
@@ -123,9 +133,9 @@
       <script src="/jquery-validation-1.19.1/dist/jquery.validate.js"></script>
       <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js"></script>
       <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  
       <script>
         var cart = <?php echo $data; ?>;
-        console.log(cart);
       $(function(){
         let container = $('#pagination');
         container.pagination({
@@ -136,40 +146,13 @@
             callback: function(data, pagination) {
                 var basket = "";
                 $.each(data, function(index, item){
-                  var baski = '<div class="baski"><div class="baski-txt"><h4>'+item.name+'</h4><div class="exdsp"><span class="baski-price">'+item.subtotal+'</span><h5>Size: '+item.size+'</h5></div></div></div>';
+                  var baski = '<div class="baski"><div class="baski-txt"><h4>'+item.name+'</h4><div class="exdsp"><span class="baski-price">'+item.subtotal+'</span></div></div></div>';
                   basket += baski;
                 });
                 $('#bask-body').html(basket);
             }
         })
       })
-
-      function handlePayment(amount){
-        var handler = StripeCheckout.configure({
-          key: 'pk_test_51KL2ppAv3yHCdNvTeRaZr5Ek3glyEeCOGW1lVBFzSjHx0DUMAn44bOulpIJcfR2QDKC3z9DyMe4igfoTrnMHJjMk00frEspLE7',
-          locale: 'auto',
-          token: function(token){
-            console.log('Token Generated' + token);
-            $.ajax({
-              url: '/payment',
-              method: 'post',
-              data: {
-                tokenId: token.id,
-                amount: amount
-              },
-              dataType: "json",
-              success: function(response){
-                console.log(response.data);
-              }
-            })
-          }
-        });
-        handler.open({
-          name: 'Clothe',
-          description: 'something',
-          amount: amount
-        });
-      }
       </script>
 </body>
 </html>

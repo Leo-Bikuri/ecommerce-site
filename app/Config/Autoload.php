@@ -43,6 +43,8 @@ class Autoload extends AutoloadConfig
 		APP_NAMESPACE => APPPATH, // For custom app namespace
 		'Config'      => APPPATH . 'Config',
 		'CodeIgniterCart' => ROOTPATH . 'vendor/jason-napolitano/codeigniter4-cart-module/src',
+		'Stripe' => ROOTPATH . 'vendor/stripe/stripe-php/init.php',
+		'Dompdf'      => APPPATH . 'ThirdParty/dompdf/src'
 	];
 
 	/**

@@ -89,12 +89,11 @@
                             type: 'POST',
                             data: $(form).serialize(),
                             success: function(response){
-                                if(response === "success"){
+                                if(response == "success"){
                                 alert('Registration successful');
-                                document.getElementById('reg-form').reset();
+                                window.location.href = '/Login';
                                 }else{
                                     alert('Registration failed');
-                                    document.getElementById('reg-form').reset();
                                 }
                             }
                         });

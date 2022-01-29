@@ -43,6 +43,18 @@ defined('YEAR')   || define('YEAR', 31536000);
 defined('DECADE') || define('DECADE', 315360000);
 
 /*
+ |--------------------------------------------------------------------------
+ | Stripe Constants
+ |--------------------------------------------------------------------------
+
+ */
+
+
+defined("STRIPE_KEY") || define('STRIPE_KEY', "pk_test_51KL2ppAv3yHCdNvTeRaZr5Ek3glyEeCOGW1lVBFzSjHx0DUMAn44bOulpIJcfR2QDKC3z9DyMe4igfoTrnMHJjMk00frEspLE7");
+defined("STRIPE_SECRET") || define('STRIPE_SECRET', "sk_test_51KL2ppAv3yHCdNvTCmhwfsgIb9RCNjLaHAJUKgwpmjJllKJ95stLVDEJ7CVrIKQK9qlJSMlbAPTPC0wliq2tExaU00lG1V0IZJ");
+
+
+/*
  | --------------------------------------------------------------------------
  | Exit Status Codes
  | --------------------------------------------------------------------------

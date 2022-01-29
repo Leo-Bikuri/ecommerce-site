@@ -167,7 +167,6 @@
                 success: function(response){
                     if(response == "success"){
                         $inputs.prop("disabled", false);
-                        location.reload();
                         Swal.fire({
                             position: 'top-end',
                             icon: 'success',
@@ -176,6 +175,8 @@
                             showConfirmButton: false,
                             allowOutsideClick:false,
                             timerProgressBar: true,
+                        }).then(()=>{
+                            location.reload();
                         })
                         }else{
                             $inputs.prop("disabled", false);
@@ -187,7 +188,9 @@
                             showConfirmButton: false,
                             allowOutsideClick:false,
                             timerProgressBar: true,
-                           })
+                           }).then(()=>{
+                            location.reload();
+                        })
                         }
                 }
             });

@@ -68,7 +68,7 @@
                             data: $(form).serialize(),
                             success: function(response){
                                 if(response === "success"){
-                                window.location.href = "<?php echo base_url('/')?>";
+                                window.location.href = "/home";
                                 }else{
                                     alert("Email or Password is incorrect");
                                 }

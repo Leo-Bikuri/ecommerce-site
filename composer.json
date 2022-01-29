@@ -10,7 +10,8 @@
 		"twbs/bootstrap-icons": "^1.6",
 		"jason-napolitano/codeigniter4-cart-module": "^1.1",
 		"stripe/stripe-php": "^7.112",
-		"firebase/php-jwt": "^6.0"
+		"firebase/php-jwt": "^6.0",
+		"dompdf/dompdf": "^1.1"
 	},
 	"require-dev": {
 		"fakerphp/faker": "^1.9",

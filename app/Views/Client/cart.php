@@ -41,14 +41,6 @@
 
     <section id="cart-bottom" class="container">
         <div class="row">
-            <div class="coupon col-lg-6 col-md-6 col-12 mb-4">
-                <div>
-                    <h5>COUPON</h5>
-                    <p>Enter your coupon code if you have one. </p>
-                    <input type="text" placeholder="Coupon Code">
-                    <button>APPLY COUPON</button>
-                </div>
-            </div>
             <div class="total col-lg-6 col-md-6 col-12">
                 <div>
                     <h5>CART TOTAL</h5>
@@ -65,7 +57,7 @@
                         <h6>Total</h6>
                         <p><?="KSH "?><?=$cart->total() + 200?> </p>
                     </div>
-                    <button class="ml-auto" onclick="handlePayment('<?=$cart->total()?>');">PROCEED TO CHECKOUT</button>
+                    <button class="ml-auto" onclick="window.location.href='/checkout'">PROCEED TO CHECKOUT</button>
                 </div>
 
             </div>
@@ -170,35 +162,6 @@
                     }
                 }
             });
-        }
-        function handlePayment(amount) {
-            var handler = StripeCheckout.configure({
-            key: 'pk_test_51KL2ppAv3yHCdNvTeRaZr5Ek3glyEeCOGW1lVBFzSjHx0DUMAn44bOulpIJcfR2QDKC3z9DyMe4igfoTrnMHJjMk00frEspLE7',
-            locale: 'auto',
-            token: function (token) {
-            console.log('Token Generated' + token);
-            $('#getTokenRes').html(JSON.stringify(token));
-            $.ajax({
-                url: "<?php echo base_url(); ?>StripeController/stripePayment",
-                method: 'post',
-                data: {
-                tokenId: token.id,
-                amount: <?= $cart->total()?>,
-                },
-                dataType: "json",
-                success: function (response) {
-                console.log(response.data);
-                // $('#getTokenRes').append('<br />' + JSON.stringify(response
-                //     .data));
-                }
-            })
-            }
-        });
-        handler.open({
-            name: 'Style',
-            description: 'Clothing items',
-            amount: <?= $cart->total()?>
-        });
         }
     </script>
 </body>
