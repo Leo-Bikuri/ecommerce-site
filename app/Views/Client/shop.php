@@ -5,7 +5,7 @@
             </div>
             <ul>
                 <?php foreach($subcategories as $subcategory){?>
-                <li><a href = "/shop-subcategory/<?=$subcategory['subcategory_id']?>"><?= $subcategory['subcategory_name'] ?></a></li>
+                <li><a href = "/shop/<?=session()->get('id')."/".$subcategory['subcategory_id']?>"><?= $subcategory['subcategory_name'] ?></a></li>
                 <?php } ?>
             </ul>
         </div>
@@ -17,9 +17,27 @@
                 Sort by:
             </button>
             <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton2">
-                <li><a class="dropdown-item" href="#">Newest arrivals</a></li>
-                <li><a class="dropdown-item" href="#">Price: Low to High</a></li>
-                <li><a class="dropdown-item" href="#">Price: High to Low</a></li>
+                <li><a class="dropdown-item" href="<?php
+                    if(session()->has('sub_id')){
+                        echo "/shop/".session()->get('id')."/".session()->get('sub_id')."/cdesc";
+                    }else{
+                        echo "/shop/".session()->get('id')."/cdesc";
+                    }
+                ?>">Newest arrivals</a></li>
+                <li><a class="dropdown-item" href="<?php
+                    if(session()->has('sub_id')){
+                        echo "/shop/".session()->get('id')."/".session()->get('sub_id')."/pasc";
+                    }else{
+                        echo "/shop/".session()->get('id')."/pasc";
+                    }
+                ?>">Price: Low to High</a></li>
+                <li><a class="dropdown-item" href="<?php
+                    if(session()->has('sub_id')){
+                        echo "/shop/".session()->get('id')."/".session()->get('sub_id')."/pdesc";
+                    }else{
+                        echo "/shop/".session()->get('id')."/pdesc";
+                    }
+                ?>">Price: High to Low</a></li>
             </ul>
         </div>
             <h2 class="font-weight-bold">Clothes Featured</h2>

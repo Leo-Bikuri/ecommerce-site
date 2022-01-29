@@ -9,7 +9,7 @@
 		"codeigniter4/framework": "^4",
 		"twbs/bootstrap-icons": "^1.6",
 		"jason-napolitano/codeigniter4-cart-module": "^1.1",
-		"stripe/stripe-php": "^7.111",
+		"stripe/stripe-php": "^7.112",
 		"firebase/php-jwt": "^6.0"
 	},
 	"require-dev": {

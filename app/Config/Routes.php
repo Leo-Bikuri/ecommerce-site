@@ -51,10 +51,14 @@ $routes->post('/administrator/update/(:num)', 'Admin::update/$1');
 
 //Client routes
 $routes->get('/home', 'Client::index');
-$routes->get('/shop/(:alphanum)', 'Client::shop/$1');
+$routes->get('/shop/(:num)', 'Client::shop/$1');
+$routes->get('/shop/(:num)/(:num)', 'Client::shop/$1/$2');
+$routes->get('/shop/(:num)/(:alphanum)', 'Client::shop/$1/$2');
+$routes->get('/shop/(:num)/(:num)/(:alphanum)', 'Client::shop/$1/$2/$3');
 $routes->get('/cart', 'Client::cart');
 $routes->get('/product/(:num)', 'Client::sproduct/$1');
-$routes->get('/shop-subcategory/(:alphanum)', 'Client::shop_subcategories/$1');
+// $routes->get('/shop-subcategory/(:alphanum)', 'Client::shop_subcategories/$1');
+// $routes->get('/shop-subcategory/(:alphanum)/(:alphanum)', 'Client::shop_subcategories/$1/$2');
 $routes->post('/basket', 'Client::add_to_cart');
 $routes->get('/cart_delete/(:alphanum)', 'Client::cart_delete/$1');
 $routes->post('/update_cart/(:alphanum)', 'Client::update_cart/$1');
